@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 const TILE_SIZE := 32.0
-const MOVE_TIME = 0.3
 
 var current_move_dir := Vector2.ZERO
 var target_position := Vector2.ZERO
@@ -16,8 +15,11 @@ func _process(delta: float) -> void:
 	pass
 
 
-func clear_move_dir() -> void:
-	current_move_dir = Vector2.ZERO
+## find position to closest TILE
+## (since block anchored to top-left, can just round in TILE-units)
+func get_nearest_tile_pos() -> Vector2:
+	var tile_pos := position / TILE_SIZE
+	return tile_pos.round() * TILE_SIZE
 
 
 ## Returns if can accept the push_dir
@@ -29,14 +31,11 @@ func receive_push(push_dir: Vector2) -> bool:
 		#print("Receive_push(), return early, as already moving")
 		return false
 	
-	current_move_dir = push_dir
+	#current_move_dir = push_dir
 	target_position = position + (push_dir * TILE_SIZE)
 	#print("Receive_push(), push_dir=", push_dir)
 	#print("    - position=", position, ", target_pos=", target_position)
 	
-	var tween := create_tween()
-	tween.tween_property(self, "position", target_position, MOVE_TIME)
-	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	## clear move_dir, when tween done
-	tween.finished.connect(clear_move_dir)
+	var coll := move_and_collide((push_dir * TILE_SIZE))
+	print("PushBlock, isColl=", coll != null)
 	return true
