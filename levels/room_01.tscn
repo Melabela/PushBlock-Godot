@@ -82,11 +82,11 @@ tile_map_data = PackedByteArray("AAAQAAkAAwAAAAAAAAAQAA0AAwAAAAAAAAA=")
 tile_set = SubResource("TileSet_e5ygn")
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("4_2ltg3")]
-position = Vector2(144, 176)
+position = Vector2(128, 160)
 scale = Vector2(0.9, 0.9)
 
 [node name="PushBlock" parent="." instance=ExtResource("6_l7yo7")]
-position = Vector2(400, 336)
+position = Vector2(384, 320)
 
 [node name="PushBlock2" parent="." instance=ExtResource("6_l7yo7")]
-position = Vector2(240, 144)
+position = Vector2(224, 128)
