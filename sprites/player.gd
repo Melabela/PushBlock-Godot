@@ -4,13 +4,14 @@ extends CharacterBody2D
 
 const TILE_SIZE := 32.0
 const MOVE_STEPS := 6
-## velocity = pixels / sec
-## 6 steps in 60 frames = 6/60 = 1/10
-## SPEED = 1 / (1/10)
-const SPEED := 10.0
 
 var bIsMoving := false
 var nCurrStep := 0
+var move_per_step := Vector2.ZERO
+
+
+func _ready() -> void:
+	pass
 
 
 const FLOAT_EPSILON = 0.0001
@@ -42,10 +43,6 @@ func determine_collision_side(collision: KinematicCollision2D) -> Vector2:
 	return Vector2.ZERO
 
 
-func _ready() -> void:
-	pass
-
-
 func get_input_dir() -> Vector2:
 	var dir := Vector2.ZERO
 	if Input.is_action_just_pressed("move_left"):
@@ -67,31 +64,27 @@ func clamp_position_in_viewport() -> void:
 	position.y = clampf(position.y, 0, viewport_size.y - TILE_SIZE)
 
 
-func stop_moving() -> void:
-	velocity = Vector2.ZERO
-	collision_shape_2d.set_collision_box(velocity)
+func end_move() -> void:
 	bIsMoving = false
 	nCurrStep = 0
+	move_per_step = Vector2.ZERO
+	collision_shape_2d.set_collision_box(velocity)
 
 
 func _physics_process(delta: float) -> void:
 	if bIsMoving:
 		nCurrStep += 1
-		var bCollision := move_and_slide()
+		var collision := move_and_collide(move_per_step)
 		clamp_position_in_viewport()
-		
-		if nCurrStep >= MOVE_STEPS:
-			stop_moving()
-		
-		if bCollision:
+		if collision or (nCurrStep >= MOVE_STEPS):
+			end_move()
+		if collision:
 			#print("Player - Got collision")
-			stop_moving()
-			var lastCollision := get_last_slide_collision()
-			var collideObject := lastCollision.get_collider()
+			var collideObject := collision.get_collider()
 			#if "name" in collideObject:
 			#	print(collideObject.name)
 			if collideObject.is_in_group("PushBlock"):
-				var collisionSide = determine_collision_side(lastCollision)
+				var collisionSide = determine_collision_side(collision)
 				#print("collisionSide: ", collisionSide)
 				if collisionSide != Vector2.ZERO:
 					collideObject.receive_push(collisionSide)
@@ -100,6 +93,7 @@ func _physics_process(delta: float) -> void:
 		if move_dir != Vector2.ZERO:
 			collision_shape_2d.set_collision_box(move_dir)
 			## velocity calc: see variables at top of file
-			velocity = move_dir * TILE_SIZE * SPEED
-			bIsMoving = true
+			var move_tile_size := move_dir * TILE_SIZE
+			move_per_step = move_tile_size / MOVE_STEPS
 			nCurrStep = 0
+			bIsMoving = true
