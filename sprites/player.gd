@@ -1,8 +1,14 @@
 extends CharacterBody2D
 
-
 const TILE_SIZE := 32.0
-const MOVE_MULTIPLIER := 8.0
+const MOVE_STEPS := 6
+## velocity = pixels / sec
+## 6 steps in 60 frames = 6/60 = 1/10
+## SPEED = 1 / (1/10)
+const SPEED := 10.0
+
+var bIsMoving := false
+var nCurrStep := 0
 
 
 const FLOAT_EPSILON = 0.0001
@@ -38,28 +44,58 @@ func _ready() -> void:
 	pass
 
 
-func _physics_process(delta: float) -> void:
-	## get basic input & move
-	var directionX := Input.get_axis("move_left", "move_right")
-	velocity.x = TILE_SIZE * MOVE_MULTIPLIER * directionX
-	var directionY := Input.get_axis("move_up", "move_down")
-	velocity.y = TILE_SIZE * MOVE_MULTIPLIER * directionY
-	var bCollision := move_and_slide()
-	
-	if bCollision:
-		#print("Player - Got collision")
-		var lastCollision := get_last_slide_collision()
-		var collideObject := lastCollision.get_collider()
-		#if "name" in collideObject:
-		#	print(collideObject.name)
-		if collideObject.is_in_group("PushBlock"):
-			var collisionSide = determine_collision_side(lastCollision)
-			#print("collisionSide: ", collisionSide)
-			if collisionSide != Vector2.ZERO:
-				collideObject.receive_push(collisionSide)
+func get_input_dir() -> Vector2:
+	var dir := Vector2.ZERO
+	if Input.is_action_just_pressed("move_left"):
+		dir.x = -1
+	elif Input.is_action_just_pressed("move_right"):
+		dir.x = +1
+	elif Input.is_action_just_pressed("move_up"):
+		dir.y = -1
+	elif Input.is_action_just_pressed("move_down"):
+		dir.y = +1
+	return dir
 
+
+func clamp_position_in_viewport() -> void:
 	## keep player within viewport
 	var viewport_size := get_viewport_rect().size
 	## player anchored in top-left corner
 	position.x = clampf(position.x, 0, viewport_size.x - TILE_SIZE)
 	position.y = clampf(position.y, 0, viewport_size.y - TILE_SIZE)
+
+
+func stop_moving() -> void:
+	velocity = Vector2.ZERO
+	bIsMoving = false
+	nCurrStep = 0
+
+
+func _physics_process(delta: float) -> void:
+	if bIsMoving:
+		nCurrStep += 1
+		var bCollision := move_and_slide()
+		clamp_position_in_viewport()
+		
+		if nCurrStep >= MOVE_STEPS:
+			stop_moving()
+		
+		if bCollision:
+			#print("Player - Got collision")
+			stop_moving()
+			var lastCollision := get_last_slide_collision()
+			var collideObject := lastCollision.get_collider()
+			#if "name" in collideObject:
+			#	print(collideObject.name)
+			if collideObject.is_in_group("PushBlock"):
+				var collisionSide = determine_collision_side(lastCollision)
+				#print("collisionSide: ", collisionSide)
+				if collisionSide != Vector2.ZERO:
+					collideObject.receive_push(collisionSide)
+	else:
+		var move_dir := get_input_dir()
+		if move_dir != Vector2.ZERO:
+			## velocity calc: see variables at top of file
+			velocity = move_dir * TILE_SIZE * SPEED
+			bIsMoving = true
+			nCurrStep = 0
