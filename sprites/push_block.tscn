@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://sprites/push_block.gd" id="1_1eey1"]
 [ext_resource type="Texture2D" uid="uid://c80alpmfj86up" path="res://assets/blocks/red_block.png" id="2_7swtx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gkc4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1pui"]
+resource_local_to_scene = true
 size = Vector2(32, 32)
 
 [node name="PushBlock" type="StaticBody2D" groups=["PushBlock"]]
@@ -17,4 +18,4 @@ texture = ExtResource("2_7swtx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_5gkc4")
+shape = SubResource("RectangleShape2D_g1pui")
