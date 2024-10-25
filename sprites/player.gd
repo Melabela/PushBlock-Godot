@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
 const TILE_SIZE := 32.0
 const MOVE_STEPS := 6
 ## velocity = pixels / sec
@@ -67,6 +69,7 @@ func clamp_position_in_viewport() -> void:
 
 func stop_moving() -> void:
 	velocity = Vector2.ZERO
+	collision_shape_2d.set_collision_box(velocity)
 	bIsMoving = false
 	nCurrStep = 0
 
@@ -95,6 +98,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		var move_dir := get_input_dir()
 		if move_dir != Vector2.ZERO:
+			collision_shape_2d.set_collision_box(move_dir)
 			## velocity calc: see variables at top of file
 			velocity = move_dir * TILE_SIZE * SPEED
 			bIsMoving = true
