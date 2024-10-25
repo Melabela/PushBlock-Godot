@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cw3au0cgpf6yv"]
+[gd_scene load_steps=13 format=4 uid="uid://cw3au0cgpf6yv"]
 
 [ext_resource type="Texture2D" uid="uid://ctv05ywqld50k" path="res://assets/ground_tiles.png" id="1_f3n2d"]
 [ext_resource type="Texture2D" uid="uid://blkmmt4ygkwx0" path="res://assets/block_tiles.png" id="1_kl0b8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbwy520hevltq" path="res://assets/switch_tiles.png" id="3_88mk6"]
 [ext_resource type="PackedScene" uid="uid://fgjpmetf0e6h" path="res://sprites/player.tscn" id="4_2ltg3"]
 [ext_resource type="PackedScene" uid="uid://di6mif6vnnkhj" path="res://sprites/push_block.tscn" id="6_l7yo7"]
+[ext_resource type="PackedScene" uid="uid://c32uyf3w07r46" path="res://sprites/switch.tscn" id="7_6sswm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aql1m"]
 resource_name = "Ground Tiles"
@@ -77,15 +78,17 @@ collision_enabled = false
 tile_map_data = PackedByteArray("AAAKAAkAAgABAAAAAAAKAAoAAgABAAAAAAAKAAwAAgABAAAAAAAKAA0AAgABAAAAAAAKAA4AAgABAAAAAAALAA4AAgABAAAAAAAMAA4AAgABAAAAAAANAA4AAgABAAAAAAAOAA4AAgABAAAAAAAPAA4AAgABAAAAAAAQAA4AAgABAAAAAAARAA4AAgABAAAAAAAKAAgAAgABAAAAAAALAAgAAgABAAAAAAAMAAgAAgABAAAAAAANAAgAAgABAAAAAAAOAAgAAgABAAAAAAAPAAgAAgABAAAAAAAQAAgAAgABAAAAAAARAAgAAgABAAAAAAAJAAoAAgABAAAAAAAJAAwAAgABAAAAAAANAAsAAgABAAAAAAAOAAsAAgABAAAAAAAPAAsAAgABAAAAAAARAAsAAgABAAAAAAARAAkAAgABAAAAAAARAAoAAgABAAAAAAARAAwAAgABAAAAAAARAA0AAgABAAAAAAA=")
 tile_set = SubResource("TileSet_e5ygn")
 
-[node name="Switches_TilemapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAQAAkAAwAAAAAAAAAQAA0AAwAAAAAAAAA=")
-tile_set = SubResource("TileSet_e5ygn")
+[node name="Switch" parent="." instance=ExtResource("7_6sswm")]
+position = Vector2(512, 288)
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("4_2ltg3")]
-position = Vector2(128, 160)
+[node name="Switch2" parent="." instance=ExtResource("7_6sswm")]
+position = Vector2(512, 416)
 
 [node name="PushBlock" parent="." instance=ExtResource("6_l7yo7")]
 position = Vector2(384, 320)
 
 [node name="PushBlock2" parent="." instance=ExtResource("6_l7yo7")]
 position = Vector2(224, 128)
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("4_2ltg3")]
+position = Vector2(128, 160)
