@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://di6mif6vnnkhj"]
+[gd_scene load_steps=5 format=3 uid="uid://di6mif6vnnkhj"]
 
 [ext_resource type="Script" path="res://sprites/push_block.gd" id="1_1eey1"]
 [ext_resource type="Texture2D" uid="uid://c80alpmfj86up" path="res://assets/blocks/red_block.png" id="2_7swtx"]
+[ext_resource type="Script" path="res://sprites/tile_collision_shape.gd" id="3_f3xfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1pui"]
 resource_local_to_scene = true
@@ -19,3 +20,4 @@ texture = ExtResource("2_7swtx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_g1pui")
+script = ExtResource("3_f3xfn")
