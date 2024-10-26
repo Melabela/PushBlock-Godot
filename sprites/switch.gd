@@ -1,5 +1,8 @@
 extends Area2D
 
+signal switch_pressed
+signal switch_released
+
 var bIsPressed := false
 
 
@@ -14,10 +17,12 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("Switch: _on_body_entered()")
+	#print("Switch: _on_body_entered()")
 	bIsPressed = true
+	switch_pressed.emit()
 
 
 func _on_body_exited(body: Node2D) -> void:
-	print("Switch: _on_body_exited()")
+	#print("Switch: _on_body_exited()")
 	bIsPressed = false
+	switch_released.emit()
