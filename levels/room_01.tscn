@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cw3au0cgpf6yv"]
+[gd_scene load_steps=14 format=4 uid="uid://cw3au0cgpf6yv"]
 
 [ext_resource type="Texture2D" uid="uid://ctv05ywqld50k" path="res://assets/ground_tiles.png" id="1_f3n2d"]
 [ext_resource type="Texture2D" uid="uid://blkmmt4ygkwx0" path="res://assets/block_tiles.png" id="1_kl0b8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://fgjpmetf0e6h" path="res://sprites/player.tscn" id="4_2ltg3"]
 [ext_resource type="PackedScene" uid="uid://di6mif6vnnkhj" path="res://sprites/push_block.tscn" id="6_l7yo7"]
 [ext_resource type="PackedScene" uid="uid://c32uyf3w07r46" path="res://sprites/switch.tscn" id="7_6sswm"]
+[ext_resource type="Script" path="res://levels/ui_group.gd" id="9_rup50"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aql1m"]
 resource_name = "Ground Tiles"
@@ -104,6 +105,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("9_rup50")
 
 [node name="ColorRect" type="ColorRect" parent="UIGroup"]
 layout_mode = 0
