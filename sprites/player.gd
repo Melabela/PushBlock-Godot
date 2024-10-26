@@ -61,14 +61,6 @@ func get_input_dir() -> Vector2:
 	return dir
 
 
-func clamp_position_in_viewport() -> void:
-	## keep player within viewport
-	var viewport_size := get_viewport_rect().size
-	## player anchored in top-left corner
-	position.x = clampf(position.x, 0, viewport_size.x - TILE_SIZE)
-	position.y = clampf(position.y, 0, viewport_size.y - TILE_SIZE)
-
-
 func end_move() -> void:
 	bIsMoving = false
 	nCurrStep = 0
@@ -85,7 +77,6 @@ func _physics_process(delta: float) -> void:
 	if bIsMoving:
 		nCurrStep += 1
 		var collision := move_and_collide(move_per_step)
-		clamp_position_in_viewport()
 		if nCurrStep >= MOVE_STEPS:
 			## if moved, and didn't collide first, (nCurrStep > 0)
 			## but update & report at end of move steps
