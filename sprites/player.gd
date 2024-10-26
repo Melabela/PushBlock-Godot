@@ -2,12 +2,17 @@ extends CharacterBody2D
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
+signal player_moved(step_count)
+
 const TILE_SIZE := 32.0
 const MOVE_STEPS := 6
 
 var bIsMoving := false
 var nCurrStep := 0
 var move_per_step := Vector2.ZERO
+
+## show in UI
+var player_steps := 0
 
 
 func _ready() -> void:
@@ -71,11 +76,20 @@ func end_move() -> void:
 	collision_shape_2d.set_collision_box(velocity)
 
 
+func increment_step_count() -> void:
+	player_steps += 1
+	player_moved.emit(player_steps)
+
+
 func _physics_process(delta: float) -> void:
 	if bIsMoving:
 		nCurrStep += 1
 		var collision := move_and_collide(move_per_step)
 		clamp_position_in_viewport()
+		if nCurrStep >= MOVE_STEPS:
+			## if moved, and didn't collide first, (nCurrStep > 0)
+			## but update & report at end of move steps
+			increment_step_count()
 		if collision or (nCurrStep >= MOVE_STEPS):
 			end_move()
 		if collision:
