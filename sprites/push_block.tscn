@@ -8,9 +8,10 @@
 resource_local_to_scene = true
 size = Vector2(32, 32)
 
-[node name="PushBlock" type="StaticBody2D" groups=["PushBlock"]]
+[node name="PushBlock" type="AnimatableBody2D" groups=["PushBlock"]]
 collision_layer = 2
 collision_mask = 3
+sync_to_physics = false
 script = ExtResource("1_1eey1")
 
 [node name="BlockSprite" type="Sprite2D" parent="."]
