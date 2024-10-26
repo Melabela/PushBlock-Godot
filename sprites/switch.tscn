@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c32uyf3w07r46"]
+[gd_scene load_steps=4 format=3 uid="uid://c32uyf3w07r46"]
 
 [ext_resource type="Texture2D" uid="uid://hrbthrs4vrhb" path="res://assets/switches/yellow_switch.png" id="1_4xnuu"]
+[ext_resource type="Script" path="res://sprites/switch.gd" id="1_kjmfw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1pui"]
-size = Vector2(32, 32)
+size = Vector2(28, 28)
 
 [node name="Switch" type="Area2D" groups=["PushBlock"]]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_kjmfw")
 
 [node name="SwitchSprite" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
@@ -16,3 +18,6 @@ texture = ExtResource("1_4xnuu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_g1pui")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
