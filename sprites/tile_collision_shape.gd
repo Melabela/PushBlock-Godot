@@ -3,7 +3,6 @@ extends CollisionShape2D
 
 const TILE_SIZE := 32.0
 const TILE_SIZE_HALF := TILE_SIZE / 2
-const TILE_SIZE_QRTR := TILE_SIZE / 4
 
 const CollisionBoxes = {
 	Vector2.ZERO: {  ## i.e. not moving
@@ -12,24 +11,24 @@ const CollisionBoxes = {
 		"center_pos": Vector2(TILE_SIZE_HALF, TILE_SIZE_HALF),
 	},
 	Vector2.LEFT: {
-		## cover left-half, except top & bottom pixels
-		"box_size": Vector2(TILE_SIZE_HALF, TILE_SIZE - 2.0),
-		"center_pos": Vector2(TILE_SIZE_QRTR, TILE_SIZE_HALF),
+		## flush to left edge, remove top/bottom edge pixels & 2 right pixels
+		"box_size": Vector2(TILE_SIZE - 2.0, TILE_SIZE - 2.0),
+		"center_pos": Vector2(TILE_SIZE_HALF - 1.0, TILE_SIZE_HALF),
 	},
 	Vector2.RIGHT: {
-		## cover right-half, except top & bottom pixels
-		"box_size": Vector2(TILE_SIZE_HALF, TILE_SIZE - 2.0),
-		"center_pos": Vector2(3 * TILE_SIZE_QRTR, TILE_SIZE_HALF),
+		## flush to right edge, remove top/bottom edge pixels & 2 left pixels
+		"box_size": Vector2(TILE_SIZE -2.0, TILE_SIZE - 2.0),
+		"center_pos": Vector2(TILE_SIZE_HALF + 1.0, TILE_SIZE_HALF),
 	},
 	Vector2.UP: {
-		## cover top-half, except left & right pixels
-		"box_size": Vector2(TILE_SIZE - 2.0, TILE_SIZE_HALF),
-		"center_pos": Vector2(TILE_SIZE_HALF, TILE_SIZE_QRTR),
+		## flush to top edge, remove left/right edge pixels & 2 bottom pixels
+		"box_size": Vector2(TILE_SIZE - 2.0, TILE_SIZE - 2.0),
+		"center_pos": Vector2(TILE_SIZE_HALF, TILE_SIZE_HALF - 1.0),
 	},
 	Vector2.DOWN: {
-		## cover bottom-half, except left & right pixels
-		"box_size": Vector2(TILE_SIZE - 2.0, TILE_SIZE_HALF),
-		"center_pos": Vector2(TILE_SIZE_HALF, 3 * TILE_SIZE_QRTR),
+		## flush to bottom edge, remove left/right edge pixels & 2 top pixels
+		"box_size": Vector2(TILE_SIZE - 2.0, TILE_SIZE - 2.0),
+		"center_pos": Vector2(TILE_SIZE_HALF, TILE_SIZE_HALF + 1.0),
 	},
 }
 
