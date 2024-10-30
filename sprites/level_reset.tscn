@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c54avtlbp375q"]
+
+[ext_resource type="Script" path="res://sprites/level_reset.gd" id="1_qxj4u"]
+[ext_resource type="Texture2D" uid="uid://cmjqvqdkdio81" path="res://assets/switches/level_reset.png" id="2_p78im"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1pui"]
+size = Vector2(28, 28)
+
+[node name="LevelReset" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_qxj4u")
+
+[node name="LevelResetSprite" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+texture = ExtResource("2_p78im")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_g1pui")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
