@@ -108,7 +108,7 @@ position = Vector2(384, 320)
 [node name="PushBlock2" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
 position = Vector2(224, 128)
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("4_2ltg3")]
+[node name="Player" parent="." instance=ExtResource("4_2ltg3")]
 unique_name_in_owner = true
 position = Vector2(128, 160)
 

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1pui"]
 size = Vector2(28, 28)
 
-[node name="Switch" type="Area2D" groups=["PushBlock"]]
+[node name="Switch" type="Area2D"]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_kjmfw")
