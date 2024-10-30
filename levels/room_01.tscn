@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cw3au0cgpf6yv"]
+[gd_scene load_steps=18 format=4 uid="uid://cw3au0cgpf6yv"]
 
 [ext_resource type="Texture2D" uid="uid://ctv05ywqld50k" path="res://assets/ground_tiles.png" id="1_f3n2d"]
 [ext_resource type="Texture2D" uid="uid://blkmmt4ygkwx0" path="res://assets/block_tiles.png" id="1_kl0b8"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" path="res://levels/switch_group.gd" id="5_6rh61"]
 [ext_resource type="PackedScene" uid="uid://di6mif6vnnkhj" path="res://sprites/push_block.tscn" id="6_l7yo7"]
 [ext_resource type="PackedScene" uid="uid://c32uyf3w07r46" path="res://sprites/switch.tscn" id="7_6sswm"]
+[ext_resource type="PackedScene" uid="uid://c54avtlbp375q" path="res://sprites/level_reset.tscn" id="8_x3xge"]
 [ext_resource type="Script" path="res://levels/ui_group.gd" id="9_rup50"]
+[ext_resource type="PackedScene" uid="uid://e4hb7oy4rc8f" path="res://sprites/level_exit.tscn" id="9_wnw6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aql1m"]
 resource_name = "Ground Tiles"
@@ -100,6 +102,14 @@ position = Vector2(512, 288)
 [node name="Switch2" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
 position = Vector2(512, 416)
 
+[node name="LevelTriggers" type="Node2D" parent="."]
+
+[node name="LevelReset" parent="LevelTriggers" instance=ExtResource("8_x3xge")]
+position = Vector2(608, 160)
+
+[node name="LevelExit" parent="LevelTriggers" instance=ExtResource("9_wnw6t")]
+position = Vector2(704, 544)
+
 [node name="PushBlockGroup" type="Node2D" parent="."]
 
 [node name="PushBlock" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
@@ -141,3 +151,6 @@ offset_right = 152.0
 offset_bottom = 64.0
 text = "Switches Left: N"
 vertical_alignment = 1
+
+[connection signal="level_reset_triggered" from="LevelTriggers/LevelReset" to="." method="_on_level_reset_triggered"]
+[connection signal="level_exit_triggered" from="LevelTriggers/LevelExit" to="." method="_on_level_exit_triggered"]
