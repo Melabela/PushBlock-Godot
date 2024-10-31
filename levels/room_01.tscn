@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cw3au0cgpf6yv"]
+[gd_scene load_steps=12 format=4 uid="uid://cw3au0cgpf6yv"]
 
 [ext_resource type="Script" path="res://levels/room_01.gd" id="1_sgfgk"]
 [ext_resource type="TileSet" uid="uid://d0xgiyowjixak" path="res://levels/tileset_ground.tres" id="2_hknhq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://fgjpmetf0e6h" path="res://sprites/player.tscn" id="4_2ltg3"]
 [ext_resource type="Script" path="res://levels/switch_group.gd" id="5_6rh61"]
 [ext_resource type="PackedScene" uid="uid://di6mif6vnnkhj" path="res://sprites/push_block.tscn" id="6_l7yo7"]
+[ext_resource type="PackedScene" uid="uid://byg52aviuew44" path="res://sprites/gate.tscn" id="6_q0pyq"]
 [ext_resource type="PackedScene" uid="uid://c32uyf3w07r46" path="res://sprites/switch.tscn" id="7_6sswm"]
 [ext_resource type="PackedScene" uid="uid://c54avtlbp375q" path="res://sprites/level_reset.tscn" id="8_x3xge"]
 [ext_resource type="Script" path="res://levels/ui_group.gd" id="9_rup50"]
@@ -56,6 +57,15 @@ switch_color = "blue"
 [node name="SwitchB4" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
 position = Vector2(928, 384)
 switch_color = "blue"
+
+[node name="SwitchedGates" type="Node2D" parent="."]
+
+[node name="GateYellow" parent="SwitchedGates" instance=ExtResource("6_q0pyq")]
+position = Vector2(736, 288)
+
+[node name="GateBlue" parent="SwitchedGates" instance=ExtResource("6_q0pyq")]
+position = Vector2(992, 512)
+gate_color = "blue"
 
 [node name="LevelTriggers" type="Node2D" parent="."]
 

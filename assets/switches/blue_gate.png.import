@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmu0y8gth5psm"
-path="res://.godot/imported/blue_door.png-0f7071dafd9a408630805665c3a5e8aa.ctex"
+path="res://.godot/imported/blue_gate.png-7623eb3f68893c126abf24d59d27dcb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/switches/blue_door.png"
-dest_files=["res://.godot/imported/blue_door.png-0f7071dafd9a408630805665c3a5e8aa.ctex"]
+source_file="res://assets/switches/blue_gate.png"
+dest_files=["res://.godot/imported/blue_gate.png-7623eb3f68893c126abf24d59d27dcb6.ctex"]
 
 [params]
 
