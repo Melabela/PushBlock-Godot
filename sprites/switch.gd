@@ -4,8 +4,8 @@ extends Area2D
 
 @onready var switch_sprite: Sprite2D = $SwitchSprite
 
-signal switch_pressed
-signal switch_released
+signal switch_pressed(color)
+signal switch_released(color)
 
 const switchColorMap = {
 	"yellow": preload("res://assets/switches/yellow_switch.png"),
@@ -28,10 +28,10 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	#print("Switch: _on_body_entered()")
 	bIsPressed = true
-	switch_pressed.emit()
+	switch_pressed.emit(switch_color)
 
 
 func _on_body_exited(body: Node2D) -> void:
 	#print("Switch: _on_body_exited()")
 	bIsPressed = false
-	switch_released.emit()
+	switch_released.emit(switch_color)
