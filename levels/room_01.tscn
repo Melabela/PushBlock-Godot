@@ -61,9 +61,11 @@ switch_color = "blue"
 [node name="SwitchedGates" type="Node2D" parent="."]
 
 [node name="GateYellow" parent="SwitchedGates" instance=ExtResource("6_q0pyq")]
+unique_name_in_owner = true
 position = Vector2(736, 288)
 
 [node name="GateBlue" parent="SwitchedGates" instance=ExtResource("6_q0pyq")]
+unique_name_in_owner = true
 position = Vector2(992, 512)
 gate_color = "blue"
 

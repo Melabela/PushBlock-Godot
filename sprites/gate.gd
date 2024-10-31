@@ -18,3 +18,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func gate_set_active(bActive: bool) -> void:
+	visible = bActive
+	process_mode = Node.PROCESS_MODE_INHERIT if bActive \
+					 else Node.PROCESS_MODE_DISABLED

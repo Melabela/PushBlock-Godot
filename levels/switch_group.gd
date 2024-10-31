@@ -2,6 +2,14 @@ extends Node2D
 
 signal switches_left_changed(switches_left)
 
+@onready var gate_yellow: StaticBody2D = %GateYellow
+@onready var gate_blue: StaticBody2D = %GateBlue
+
+@onready var gate_by_color = {
+	"yellow": gate_yellow,
+	"blue": gate_blue,
+}
+
 var total_switches := 0
 var active_switches := 0
 var switch_total_by_color := {}
@@ -36,9 +44,15 @@ func _on_switch_pressed(color: String) -> void:
 	active_switches += 1
 	switch_active_by_color[color] += 1
 	emit_switches_left()
+	## open (disable) gate[color], if all switches of that color are active
+	if switch_active_by_color[color] == switch_total_by_color[color]:
+		gate_by_color[color].gate_set_active(false)
 
 
 func _on_switch_released(color: String) -> void:
 	active_switches -= 1
 	switch_active_by_color[color] -= 1
 	emit_switches_left()
+	## close (enable) gate[color], if NOT all switches of that color are active
+	if switch_active_by_color[color] < switch_total_by_color[color]:
+		gate_by_color[color].gate_set_active(true)
