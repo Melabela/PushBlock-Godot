@@ -1,6 +1,14 @@
 extends AnimatableBody2D
 
+@export_enum("red", "purple") var block_color: String = "red"
+
+@onready var block_sprite: Sprite2D = $BlockSprite
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
+const blockColorMap = {
+	"red": preload("res://assets/blocks/red_block.png"),
+	"purple": preload("res://assets/blocks/purple_block.png"),
+}
 
 const TILE_SIZE := 32.0
 const MOVE_STEPS := 6
@@ -12,7 +20,7 @@ var move_per_step := Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	block_sprite.texture = blockColorMap[block_color]
 
 
 func end_move() -> void:

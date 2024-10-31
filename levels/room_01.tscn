@@ -35,11 +35,27 @@ tile_set = ExtResource("3_f3ux1")
 unique_name_in_owner = true
 script = ExtResource("5_6rh61")
 
-[node name="Switch" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
+[node name="SwitchY1" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
 position = Vector2(512, 288)
 
-[node name="Switch2" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
+[node name="SwitchY2" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
 position = Vector2(512, 416)
+
+[node name="SwitchB1" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
+position = Vector2(800, 480)
+switch_color = "blue"
+
+[node name="SwitchB2" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
+position = Vector2(1024, 288)
+switch_color = "blue"
+
+[node name="SwitchB3" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
+position = Vector2(896, 384)
+switch_color = "blue"
+
+[node name="SwitchB4" parent="SwitchGroup" instance=ExtResource("7_6sswm")]
+position = Vector2(928, 384)
+switch_color = "blue"
 
 [node name="LevelTriggers" type="Node2D" parent="."]
 
@@ -51,11 +67,27 @@ position = Vector2(1056, 512)
 
 [node name="PushBlockGroup" type="Node2D" parent="."]
 
-[node name="PushBlock" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
+[node name="PushBlockR1" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
 position = Vector2(384, 320)
 
-[node name="PushBlock2" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
-position = Vector2(224, 128)
+[node name="PushBlockR2" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
+position = Vector2(224, 160)
+
+[node name="PushBlockP1" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
+position = Vector2(864, 320)
+block_color = "purple"
+
+[node name="PushBlockP2" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
+position = Vector2(896, 288)
+block_color = "purple"
+
+[node name="PushBlockP3" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
+position = Vector2(960, 320)
+block_color = "purple"
+
+[node name="PushBlockP4" parent="PushBlockGroup" instance=ExtResource("6_l7yo7")]
+position = Vector2(832, 352)
+block_color = "purple"
 
 [node name="Player" parent="." instance=ExtResource("4_2ltg3")]
 unique_name_in_owner = true

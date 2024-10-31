@@ -1,14 +1,23 @@
 extends Area2D
 
+@export_enum("yellow", "blue") var switch_color: String = "yellow"
+
+@onready var switch_sprite: Sprite2D = $SwitchSprite
+
 signal switch_pressed
 signal switch_released
+
+const switchColorMap = {
+	"yellow": preload("res://assets/switches/yellow_switch.png"),
+	"blue": preload("res://assets/switches/blue_switch.png"),
+}
 
 var bIsPressed := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	switch_sprite.texture = switchColorMap[switch_color]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
